@@ -1,0 +1,28 @@
+<html>
+<body>
+enter country<input id="my" type="text" name="country">
+<button id="getflag">api</button>
+  <div id="op"></div>
+<script > 
+document.getElementById('getflag').addEventListener('click',flag);
+ 
+  
+function flag()
+{
+   var data;
+  var x = document.getElementById("my").value;
+  var api="https://restcountries.eu/rest/v2/";
+  var url=api+x;
+   fetch(url)
+   .then((res)=>res.json)
+   .then((data)=>{
+       data = JSON.parse(this.res);
+for(var i=0;i<data.length();i++){
+      html=html+'<mg src=" '+data[i].flag+'"style="width:200px;height:200px;"><br>';}
+        document.getElementById('op').innerHTML=html;
+      })
+}
+
+</script>
+</body>
+</html>
