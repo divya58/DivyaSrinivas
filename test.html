@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+ 
+  <title>COUNTRY</title>
+<style> 
+ html { 
+          background: url(pict.jpg) no-repeat center center fixed; 
+          -webkit-background-size: cover;
+          -moz-background-size: cover;
+          -o-background-size: cover;
+          background-size: cover;
+          }
+        
+          body {
+              
+              background: none;
+                
+}
+p{
+             text-align: center;
+           
+}
+
+input {
+              
+              margin: 20px 0;
+              
+          }
+h1{
+text-align: center;
+
+}
+img{
+
+margin-left:550px;
+}
+
+input[type=text] {
+  width: 250px;
+  box-sizing: border-box;
+  border: 2px solid #ccc;
+  border-radius: 4px;
+  font-size: 16px;
+  background-color: white;
+  background-image: url('searchicon.png');
+  background-position: 10px 10px; 
+  background-repeat: no-repeat;
+  padding: 12px 20px 12px 40px;
+  -webkit-transition: width 0.4s ease-in-out;
+  transition: width 0.4s ease-in-out;
+}
+
+input[type=text]:focus {
+  width: 100%;
+}
+</style>
+</head>
+
+<body>
+  
+      <h1>Enter Country.</h1>
+     <p> <input placeholder="India,Australia etc.." id="sea" type="text" class="validate"  onChange="onChangeCounntryDetails();"/></p>
+   
+       <div id="output"></div>
+
+  <script>
+
+function onChangeCounntryDetails()
+{
+	var url;
+	var search = document.getElementById("sea").value;
+	var html='';
+	var request = new XMLHttpRequest();
+	request.open('GET', 'https://restcountries.eu/rest/v2/name/'+search, true);
+request.onload = function() {
+  
+  var data = JSON.parse(this.response)
+ 
+  if (request.status >= 200 && request.status < 400) {
+    for(var i=0;data.length>i;i++){
+	
+	html = html+'<img id="image" src="'+data[i].flag+'" style="width:250px;height:200px;"></br>';
+	
+	}
+	
+
+	document.getElementById('output').innerHTML = html;
+  } else {
+    document.write("Country cannot find");
+  }
+};
+
+request.send();
+url='https://restcountries.eu/rest/v2/name/'+search;
+	document.getElementById("output").onclick=function()
+    {
+      window.open(url);}
+	
+}
+  
+  </script>
+</body>
+
+</html>
